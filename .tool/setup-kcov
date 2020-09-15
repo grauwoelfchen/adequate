@@ -1,0 +1,30 @@
+#!/bin/bash
+set -eu
+
+# NOTE:
+# if set KCOV_DISCARD_CACHE=true, then it will force installing kcov)
+
+renew="${KCOV_DISCARD_CACHE:-false}"
+
+kcov_dir="$(dirname $(readlink -f "${0}"))/kcov"
+kcov_cmd="${KCOV_PATH:-${kcov_dir}/bin/kcov}"
+kcov_url="https://github.com/SimonKagstrom/kcov/archive"
+kcov_ver="v34"
+
+if [[ -f "${kcov_cmd}" && "${renew}" != "true" ]]; then
+  echo "kcov already installed in ${kcov_cmd}"
+else
+  rm -fr $kcov_dir
+  mkdir $kcov_dir
+  cd $kcov_dir
+  curl -sLO ${kcov_url}/${kcov_ver}.tar.gz
+  mkdir $kcov_ver
+  tar zxvf ${kcov_ver}.tar.gz -C $kcov_ver --strip-components=1
+  cd $kcov_ver
+  mkdir build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/
+  make
+  make install DESTDIR=../
+fi

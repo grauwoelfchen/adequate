@@ -1,0 +1,10 @@
+/target
+/tmp
+
+/.tool/kcov
+/.tool/gitlab-runner
+
+# development
+*.txt
+
+.env.ci
