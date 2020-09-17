@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -ex
+
+# verify:check, verify:format and verify:lint
+echo '+make verify:all'
+make verify:all
+
+echo '+make test:all'
+make test:all
