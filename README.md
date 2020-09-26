@@ -6,8 +6,8 @@ https://gitlab.com/grauwoelfchen/adequate/commits/master) [![coverage](
 https://gitlab.com/grauwoelfchen/adequate/badges/master/coverage.svg)](
 https://gitlab.com/grauwoelfchen/adequate/commits/master)
 
-Yet another validation library which is inspired by [Accord](
-https://github.com/ChrisBuchholz/accord)
+Yet another validation library provides macros inspired by [Accord](
+https://github.com/ChrisBuchholz/accord).
 
 
 ## Repository
