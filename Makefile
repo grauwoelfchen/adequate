@@ -1,4 +1,4 @@
-# verify {{{
+# verify
 verify\:check:  ## Verify code syntax [alias: check]
 	@cargo check --all --verbose
 .PHONY: verify\:check
@@ -28,18 +28,16 @@ verify\:all: | verify\:check verify\:format verify\:lint  ## Check code using al
 
 verify: | verify\:all
 .PHONY: verify
-# }}}
 
-# test {{{
+# test
 test\:all:  ## Run all unit tests [alias: test]
 	@cargo test --tests
 .PHONY: test\:all
 
 test: | test\:all
 .PHONY: test
-# }}}
 
-# coverage {{{
+# coverage
 coverage:  ## Generate coverage report of tests [alias: cov]
 	@cargo test --lib adequate --no-run
 	@./.tool/setup-kcov
@@ -48,9 +46,8 @@ coverage:  ## Generate coverage report of tests [alias: cov]
 
 cov: | coverage
 .PHONY: cov
-# }}}
 
-# build {{{
+# build
 build\:debug:  ## Build in debug mode [alias: build]
 	cargo build
 .PHONY: build\:debug
@@ -61,9 +58,8 @@ build: | build\:debug
 build\:release:  ## Create release build
 	cargo build --release
 .PHONY: build\:release
-# }}}
 
-# utilities {{{
+# utility
 clean:  ## Clean up
 	@cargo clean
 .PHONY: clean
@@ -81,7 +77,6 @@ help:  ## Display this message
 	       {printf "\033[38;05;222m%-14s\033[0m %s\n", $$1, $$2}' | \
 	  sort
 .PHONY: help
-# }}}
 
 .DEFAULT_GOAL = test:all
 default: verify\:check verify\:format verify\:lint test\:all
