@@ -13,8 +13,34 @@ pub struct Feedback {
 #[derive(Debug, Clone)]
 pub struct Error(pub Vec<Feedback>);
 
-pub mod validator;
+pub mod validation;
 
+/// validate! macro validates given fields and its inputs.
+///
+/// ## Examples
+///
+/// ```rust
+/// # #[macro_use]
+/// # extern crate adequate;
+///
+/// # use adequate::{Error, Feedback};
+/// # use adequate::validation::max;
+///
+/// # fn main() {
+///     let text = "lorem ipsum dolor sit amet".to_string();
+///
+///     let result = validate! {
+///         "name" => text => [max(9)]
+///     };
+///     assert!(result.is_err());
+///
+///     let result = validate! {
+///         "name" => text => [max(64)],
+///         "description" => text => [max(255)]
+///     };
+///     assert!(result.is_ok());
+/// # }
+/// ```
 #[macro_export]
 macro_rules! validate {
     ( $( $n:expr => $v:expr => [ $( $c:expr ),* ] ),* ) => {{
@@ -26,7 +52,7 @@ macro_rules! validate {
                 messages: [ $( $c(&$v) ),* ]
                     .iter()
                     .cloned()
-                    .filter(|c| c.err())
+                    .filter_map(|c| c.err())
                     .collect::<Vec<_>>()
             }
         ),*]
