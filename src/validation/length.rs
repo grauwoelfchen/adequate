@@ -1,5 +1,5 @@
-pub use crate::Message;
-pub use crate::validator::ValidationResult;
+use crate::Message;
+use crate::validation::ValidationResult;
 
 /// Check if the given string has length more than max.
 pub fn max(size: usize) -> Box<dyn Fn(&String) -> ValidationResult> {
