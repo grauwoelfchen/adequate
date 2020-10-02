@@ -23,7 +23,7 @@ pub mod validation;
 /// # #[macro_use]
 /// # extern crate adequate;
 ///
-/// # use adequate::{Error, Feedback};
+/// # use adequate::{Error, Feedback, Message};
 /// # use adequate::validation::max;
 ///
 /// # fn main() {
@@ -66,4 +66,41 @@ macro_rules! validate {
             Ok(())
         }
     }};
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use super::validation::ValidationResult;
+
+    #[test]
+    fn test_failure() {
+        let dummy = "".to_string();
+        let validation = || -> Box<dyn Fn(&String) -> ValidationResult> {
+            Box::new(move |_: &String| {
+                Err(Message {
+                    text: "Error".to_string(),
+                    args: vec![],
+                })
+            })
+        };
+
+        let result = validate! {
+            "input" => dummy => [validation()]
+        };
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_success() {
+        let dummy = "".to_string();
+        let validation = || -> Box<dyn Fn(&String) -> ValidationResult> {
+            Box::new(move |_: &String| Ok(()))
+        };
+
+        let result = validate! {
+            "input" => dummy => [validation()]
+        };
+        assert!(result.is_ok());
+    }
 }
