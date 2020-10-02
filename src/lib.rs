@@ -1,17 +1,56 @@
-#[derive(Debug, Clone)]
+#[derive(Clone, Debug)]
 pub struct Message {
-    text: String,
-    args: Vec<String>,
+    pub text: String,
+    pub args: Vec<String>,
 }
 
-#[derive(Debug, Clone)]
+impl PartialEq for Message {
+    fn eq(&self, other: &Self) -> bool {
+        if self.text != other.text {
+            return false;
+        }
+        for (i, a) in self.args.iter().enumerate() {
+            if a != &other.args[i] {
+                return false;
+            }
+        }
+        true
+    }
+}
+
+#[derive(Clone, Debug)]
 pub struct Feedback {
     pub field: String,
     pub messages: Vec<Message>,
 }
 
-#[derive(Debug, Clone)]
+impl PartialEq for Feedback {
+    fn eq(&self, other: &Self) -> bool {
+        if self.field != other.field {
+            return false;
+        }
+        for (i, m) in self.messages.iter().enumerate() {
+            if m != &other.messages[i] {
+                return false;
+            }
+        }
+        true
+    }
+}
+
+#[derive(Clone, Debug)]
 pub struct Error(pub Vec<Feedback>);
+
+impl PartialEq for Error {
+    fn eq(&self, other: &Self) -> bool {
+        for (i, f) in self.0.iter().enumerate() {
+            if f != &other.0[i] {
+                return false;
+            }
+        }
+        true
+    }
+}
 
 pub mod validation;
 
@@ -33,6 +72,21 @@ pub mod validation;
 ///         "name" => text => [max(9)]
 ///     };
 ///     assert!(result.is_err());
+///     assert_eq!(
+///         result.unwrap_err(),
+///         Error(vec![
+///             Feedback {
+///                 field: "name".to_string(),
+///                 messages: vec![
+///                     Message {
+///                       text: "Must not contain more characters than %1."
+///                         .to_string(),
+///                       args: vec!["9".to_string()]
+///                     }
+///                 ]
+///             }
+///         ])
+///     );
 ///
 ///     let result = validate! {
 ///         "name" => text => [max(64)],
