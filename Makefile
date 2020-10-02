@@ -31,6 +31,7 @@ verify: | verify\:all
 
 # test
 test\:all:  ## Run all unit tests [alias: test]
+	@cargo test --doc
 	@cargo test --tests
 .PHONY: test\:all
 
