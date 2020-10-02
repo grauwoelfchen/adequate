@@ -44,8 +44,6 @@ pub mod validation;
 #[macro_export]
 macro_rules! validate {
     ( $( $n:expr => $v:expr => [ $( $c:expr ),* ] ),* ) => {{
-        use adequate::Feedback;
-
         let errors = vec![$(
             Feedback {
                 field: $n.to_string(),
