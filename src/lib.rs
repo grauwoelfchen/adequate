@@ -19,7 +19,7 @@ impl fmt::Display for Message {
         }
         // panic if identifiers in template text won't match
         let out = strfmt(&self.text, &args).expect("message format is invalid");
-        if args.len() > 0 && self.text == out {
+        if !args.is_empty() && self.text == out {
             panic!("message does not have expected number of identifiers");
         }
         write!(f, "{}", out)
