@@ -1,7 +1,27 @@
+extern crate strfmt;
+
+use std::collections::HashMap;
+use std::fmt;
+
+use strfmt::strfmt;
+
 #[derive(Clone, Debug)]
 pub struct Message {
     pub text: String,
     pub args: Vec<String>,
+}
+
+impl fmt::Display for Message {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut args = HashMap::new();
+        for (i, a) in self.args.iter().enumerate() {
+            args.insert(i.to_string(), a);
+        }
+        // panic if identifiers in template text won't match
+        let out = strfmt(&self.text, &args)
+            .expect("validation message format is invalid");
+        write!(f, "{}", out)
+    }
 }
 
 impl PartialEq for Message {
@@ -124,6 +144,21 @@ macro_rules! validate {
 mod test {
     use super::*;
     use super::validation::ValidationResult;
+
+    #[test]
+    fn test_message() {
+        let m = Message {
+            text: "lorem ipsum".to_string(),
+            args: Vec::new(),
+        };
+        assert_eq!(m.to_string(), "lorem ipsum");
+
+        let m = Message {
+            text: "lorem {0}".to_string(),
+            args: vec!["ipsum".to_string()],
+        };
+        assert_eq!(m.to_string(), "lorem ipsum");
+    }
 
     #[test]
     fn test_failure() {
