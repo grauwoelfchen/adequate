@@ -18,8 +18,10 @@ impl fmt::Display for Message {
             args.insert(i.to_string(), a);
         }
         // panic if identifiers in template text won't match
-        let out = strfmt(&self.text, &args)
-            .expect("validation message format is invalid");
+        let out = strfmt(&self.text, &args).expect("message format is invalid");
+        if args.len() > 0 && self.text == out {
+            panic!("message does not have expected number of identifiers");
+        }
         write!(f, "{}", out)
     }
 }
@@ -158,6 +160,36 @@ mod test {
             args: vec!["ipsum".to_string()],
         };
         assert_eq!(m.to_string(), "lorem ipsum");
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_non_numeric_tmpl_ident() {
+        let m = Message {
+            text: "lorem ipsum {}".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_missing_ident() {
+        let m = Message {
+            text: "lorem ipsum".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_missing_arg() {
+        let m = Message {
+            text: "lorem ipsum {0} {1}".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
     }
 
     #[test]
