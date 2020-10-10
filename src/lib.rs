@@ -1,7 +1,29 @@
+extern crate strfmt;
+
+use std::collections::HashMap;
+use std::fmt;
+
+use strfmt::strfmt;
+
 #[derive(Clone, Debug)]
 pub struct Message {
     pub text: String,
     pub args: Vec<String>,
+}
+
+impl fmt::Display for Message {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut args = HashMap::new();
+        for (i, a) in self.args.iter().enumerate() {
+            args.insert(i.to_string(), a);
+        }
+        // panic if identifiers in template text won't match
+        let out = strfmt(&self.text, &args).expect("message format is invalid");
+        if !args.is_empty() && self.text == out {
+            panic!("message does not have expected number of identifiers");
+        }
+        write!(f, "{}", out)
+    }
 }
 
 impl PartialEq for Message {
@@ -124,6 +146,51 @@ macro_rules! validate {
 mod test {
     use super::*;
     use super::validation::ValidationResult;
+
+    #[test]
+    fn test_message() {
+        let m = Message {
+            text: "lorem ipsum".to_string(),
+            args: Vec::new(),
+        };
+        assert_eq!(m.to_string(), "lorem ipsum");
+
+        let m = Message {
+            text: "lorem {0}".to_string(),
+            args: vec!["ipsum".to_string()],
+        };
+        assert_eq!(m.to_string(), "lorem ipsum");
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_non_numeric_tmpl_ident() {
+        let m = Message {
+            text: "lorem ipsum {}".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_missing_ident() {
+        let m = Message {
+            text: "lorem ipsum".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_message_panic_with_missing_arg() {
+        let m = Message {
+            text: "lorem ipsum {0} {1}".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        m.to_string();
+    }
 
     #[test]
     fn test_failure() {
