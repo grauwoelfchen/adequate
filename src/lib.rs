@@ -101,7 +101,7 @@ pub mod validation;
 ///                 field: "name".to_string(),
 ///                 messages: vec![
 ///                     Message {
-///                       text: "Must not contain more characters than %1."
+///                       text: "Must not contain more characters than {0}"
 ///                         .to_string(),
 ///                       args: vec!["9".to_string()]
 ///                     }
