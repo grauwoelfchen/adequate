@@ -11,7 +11,7 @@ homepage = "https://gitlab.com/grauwoelfchen/adequate"
 readme = "README.md"
 keywords = ["validation"]
 categories = ["web-programming"]
-documentation = "https://gitlab.com/grauwoelfchen/adequate"
+documentation = "https://docs.rs/crate/adequate"
 repository = "https://gitlab.com/grauwoelfchen/adequate"
 license = "Apache-2.0"
 
