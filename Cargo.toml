@@ -1,8 +1,28 @@
 [package]
 name = "adequate"
+description = """\
+A yet another validation library provides a macro inspired by \
+Accord.\
+"""
 version = "0.1.0"
 authors = ["Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>"]
 edition = "2018"
+homepage = "https://gitlab.com/grauwoelfchen/adequate"
+readme = "README.md"
+keywords = ["validation"]
+categories = ["web-programming"]
+documentation = "https://gitlab.com/grauwoelfchen/adequate"
+repository = "https://gitlab.com/grauwoelfchen/adequate"
+license = "Apache-2.0"
+
+exclude = [
+  ".cargo-huskey/*",
+  "Makefile",
+  "/.env",
+  "/.env.ci.sample",
+  "/.clippy.toml",
+  "/.rustfmt.toml",
+]
 
 [dependencies]
 strfmt = "0.1.6"
