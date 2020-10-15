@@ -6,7 +6,7 @@ https://gitlab.com/grauwoelfchen/adequate/commits/master) [![coverage](
 https://gitlab.com/grauwoelfchen/adequate/badges/master/coverage.svg)](
 https://gitlab.com/grauwoelfchen/adequate/commits/master)
 
-A yet another validation library provides macros inspired by [Accord](
+A yet another validation library provides a macro inspired by [Accord](
 https://github.com/ChrisBuchholz/accord).
 
 
@@ -19,6 +19,20 @@ https://gitlab.com/grauwoelfchen/adequate
 
 ```zsh
 % cargo install adequate
+```
+
+## Usage
+
+See `src/validation` directory for validators.
+
+```rust
+// user's input
+let text = "lorem ipsum dolor sit amet".to_string();
+
+let result = validate! {
+    "name" => text => [max(3)]
+};
+assert!(result.is_err());
 ```
 
 ## Build
