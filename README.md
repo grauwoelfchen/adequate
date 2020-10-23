@@ -10,9 +10,16 @@ A yet another validation library provides a macro inspired by [Accord](
 https://github.com/ChrisBuchholz/accord).
 
 
-## Repository
+## Repos
 
-https://gitlab.com/grauwoelfchen/adequate
+The source code is hosted in several repos, but developed mainly on [
+GitLab.com](https://gitlab.com/grauwoelfchen/adequate).
+
+The merge/pull requests or issues on any repository are welcomed.
+
+* https://gitlab.com/grauwoelfchen/adequate
+* https://github.com/grauwoelfchen/adequate
+* https://git.sr.ht/~grauwoelfchen/adequate
 
 
 ## Installation
