@@ -46,6 +46,12 @@ pub struct Feedback {
     pub messages: Vec<Message>,
 }
 
+impl Feedback {
+    pub fn is_negative(&self) -> bool {
+        !self.messages.is_empty()
+    }
+}
+
 impl PartialEq for Feedback {
     fn eq(&self, other: &Self) -> bool {
         if self.field != other.field {
@@ -132,9 +138,9 @@ macro_rules! validate {
         ),*]
             .iter()
             .cloned()
-            .filter(|f| f.messages.len() > 0 )
+            .filter(|f| f.is_negative())
             .collect::<Vec<_>>();
-        if errors.len() > 0 {
+        if !errors.is_empty() {
             Err(Error(errors))
         } else {
             Ok(())
