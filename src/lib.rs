@@ -100,21 +100,20 @@ pub mod validation;
 ///         "name" => text => [max(9)]
 ///     };
 ///     assert!(result.is_err());
-///     assert_eq!(
-///         result.unwrap_err(),
-///         Error(vec![
-///             Feedback {
-///                 field: "name".to_string(),
-///                 messages: vec![
-///                     Message {
-///                       text: "Must not contain more characters than {0}"
-///                         .to_string(),
-///                       args: vec!["9".to_string()]
-///                     }
-///                 ]
-///             }
-///         ])
-///     );
+///
+///     let Error(out) = result.unwrap_err();
+///     assert_eq!(out, vec![
+///         Feedback {
+///             field: "name".to_string(),
+///             messages: vec![
+///                 Message {
+///                   text: "Must not contain more characters than {0}"
+///                     .to_string(),
+///                   args: vec!["9".to_string()]
+///                 }
+///             ]
+///         }
+///     ]);
 ///
 ///     let result = validate! {
 ///         "name" => text => [max(64)],
