@@ -77,6 +77,17 @@ See `.gitlab-ci.yml`.
 ```
 
 
+## Release
+
+All notable released changes of this package will be documented in CHANGELOG
+file.
+
+### Unreleased commits
+
+[v0.1.0...master](
+https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.0...master)
+
+
 ## License
 
 ```text
