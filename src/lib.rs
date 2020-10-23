@@ -199,6 +199,28 @@ mod test {
     }
 
     #[test]
+    fn test_feedback_with_positive_result() {
+        let f = Feedback {
+            field: "dummy".to_string(),
+            messages: vec![],
+        };
+        assert!(!f.is_negative());
+    }
+
+    #[test]
+    fn test_feedback_with_negative_result() {
+        let m = Message {
+            text: "lorem ipsum {0}".to_string(),
+            args: vec!["dolor".to_string()],
+        };
+        let f = Feedback {
+            field: "dummy".to_string(),
+            messages: vec![m],
+        };
+        assert!(f.is_negative());
+    }
+
+    #[test]
     fn test_failure() {
         let dummy = "".to_string();
         let validation = || -> Box<dyn Fn(&String) -> ValidationResult> {
