@@ -5,6 +5,8 @@ use std::fmt;
 
 use strfmt::strfmt;
 
+/// Message struct holds validation error message and its arguments as
+/// interpolation.
 #[derive(Clone, Debug)]
 pub struct Message {
     pub text: String,
@@ -40,6 +42,8 @@ impl PartialEq for Message {
     }
 }
 
+/// Feedback struct contains target field name and multiple Message objects if
+/// the context is negative (otherwise it will be an empty vector).
 #[derive(Clone, Debug)]
 pub struct Feedback {
     pub field: String,
@@ -66,6 +70,7 @@ impl PartialEq for Feedback {
     }
 }
 
+/// Error is an enum struct wraps multiple feedback.
 #[derive(Clone, Debug)]
 pub struct Error(pub Vec<Feedback>);
 
