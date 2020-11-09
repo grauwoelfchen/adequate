@@ -1,3 +1,5 @@
+#[macro_use]
+extern crate lazy_static;
 extern crate strfmt;
 
 use std::collections::HashMap;
