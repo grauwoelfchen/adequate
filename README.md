@@ -33,11 +33,15 @@ The merge/pull requests or issues on any repository are welcomed.
 See `src/validation` directory for validators.
 
 ```rust
-// user's input
-let text = "lorem ipsum dolor sit amet".to_string();
+use adequate::validation::length;
+
+// inputs
+let fullname = "Albrecht Dürer".to_string();
+let username = "albrecht".to_string();
 
 let result = validate! {
-    "name" => text => [max(3)]
+    "fullname" => fullname => [length::max(3)],
+    "username" => username => [length::within(3..9)]
 };
 assert!(result.is_err());
 ```
