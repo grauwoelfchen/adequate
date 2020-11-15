@@ -1,2 +1,5 @@
+Mon 16 Nov 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Add a new length validation method "within"
+
 Fri 16 Oct 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
 	* Initial release v0.1.0
