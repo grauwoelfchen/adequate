@@ -98,13 +98,13 @@ pub mod validation;
 /// # extern crate adequate;
 ///
 /// # use adequate::{Error, Feedback, Message};
-/// # use adequate::validation::max;
+/// # use adequate::validation::length;
 ///
 /// # fn main() {
 ///     let text = "lorem ipsum dolor sit amet".to_string();
 ///
 ///     let result = validate! {
-///         "name" => text => [max(9)]
+///         "name" => text => [length::max(9)]
 ///     };
 ///     assert!(result.is_err());
 ///
@@ -123,8 +123,8 @@ pub mod validation;
 ///     ]);
 ///
 ///     let result = validate! {
-///         "name" => text => [max(64)],
-///         "description" => text => [max(255)]
+///         "name" => text => [length::max(64)],
+///         "description" => text => [length::max(255)]
 ///     };
 ///     assert!(result.is_ok());
 /// # }
