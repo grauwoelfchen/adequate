@@ -49,6 +49,16 @@ pub fn min(size: usize) -> Box<dyn Fn(&String) -> ValidationResult> {
     })
 }
 
+/// Check if the given string has length less than min only when it exists.
+pub fn min_if_present(
+    size: usize,
+) -> Box<dyn Fn(&Option<String>) -> ValidationResult> {
+    Box::new(move |s: &Option<String>| match &s {
+        Some(v) => min(size)(&v),
+        None => Ok(()),
+    })
+}
+
 /// Check if the given string has length in a range of start (inclusive) .. end
 /// (exclusive).
 pub fn within(r: Range<usize>) -> Box<dyn Fn(&String) -> ValidationResult> {
@@ -142,6 +152,37 @@ mod test {
     fn test_min_err_message() {
         let f = min(9);
         let result = f(&"test".to_string());
+        assert_eq!(
+            result.map_err(|e| e.to_string()),
+            Err("Must not contain less characters than 9".to_string())
+        );
+    }
+
+    // min_if_present
+
+    #[test]
+    fn test_min_if_present_ok() {
+        let f = min_if_present(3);
+
+        let result = f(&Some("test".to_string()));
+        assert!(result.is_ok());
+
+        let result = f(&None);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_min_if_present_err() {
+        let f = min_if_present(9);
+
+        let result = f(&Some("test".to_string()));
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_min_if_present_err_message() {
+        let f = min_if_present(9);
+        let result = f(&Some("test".to_string()));
         assert_eq!(
             result.map_err(|e| e.to_string()),
             Err("Must not contain less characters than 9".to_string())
