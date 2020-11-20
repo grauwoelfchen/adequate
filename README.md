@@ -46,6 +46,17 @@ let result = validate! {
 assert!(result.is_err());
 ```
 
+### Validations
+
+###### Length
+
+* max
+* max_if_present
+* min
+* min_if_present
+* within
+
+
 ## Build
 
 Check `make help`
