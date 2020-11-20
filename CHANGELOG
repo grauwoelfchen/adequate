@@ -1,3 +1,6 @@
+Fri 21 Nov 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Add a new length validation methods "{max,min}_if_present"
+
 Mon 16 Nov 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new length validation method "within"
 
