@@ -9,7 +9,7 @@ renew="${KCOV_DISCARD_CACHE:-false}"
 kcov_dir="$(dirname $(readlink -f "${0}"))/kcov"
 kcov_cmd="${KCOV_PATH:-${kcov_dir}/bin/kcov}"
 kcov_url="https://github.com/SimonKagstrom/kcov/archive"
-kcov_ver="v34"
+kcov_ver="v38"
 
 if [[ -f "${kcov_cmd}" && "${renew}" != "true" ]]; then
   echo "kcov already installed in ${kcov_cmd}"

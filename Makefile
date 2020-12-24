@@ -42,7 +42,7 @@ test: | test\:all
 coverage:  ## Generate coverage report of tests [alias: cov]
 	@cargo test --lib adequate --no-run
 	@./.tool/setup-kcov
-	./.tool/get-covered libadequate
+	./.tool/get-covered adequate
 .PHONY: coverage
 
 cov: | coverage
