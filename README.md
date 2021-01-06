@@ -4,7 +4,10 @@
 https://gitlab.com/grauwoelfchen/adequate/badges/trunk/pipeline.svg)](
 https://gitlab.com/grauwoelfchen/adequate/commits/trunk) [![coverage](
 https://gitlab.com/grauwoelfchen/adequate/badges/trunk/coverage.svg)](
-https://gitlab.com/grauwoelfchen/adequate/commits/trunk)
+https://gitlab.com/grauwoelfchen/adequate/commits/trunk) [![crate::adequate](
+https://img.shields.io/crates/v/adequate?label=crates&style=flat)](
+https://crates.io/crates/adequate) [![doc::adequate](
+https://docs.rs/adequate/badge.svg)](https://docs.rs/crate/adequate)
 
 A yet another validation library provides a macro inspired by [Accord](
 https://github.com/ChrisBuchholz/accord).
