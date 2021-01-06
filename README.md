@@ -13,17 +13,24 @@ A yet another validation library provides a macro inspired by [Accord](
 https://github.com/ChrisBuchholz/accord).
 
 
-## Repos
+## Repositories
 
-The source code is hosted in several repos, but developed mainly on [
-GitLab.com](https://gitlab.com/grauwoelfchen/adequate).
+This is mainly developed on [GitLab.com](
+https://gitlab.com/grauwoelfchen/adequate), but the source code is hosted also
+in several following repositories.
 
-The merge/pull requests or issues on any repository are welcomed.
+Any merge/pull requests or issues on any repository are welcomed.
 
 * https://gitlab.com/grauwoelfchen/adequate
 * https://github.com/grauwoelfchen/adequate
 * https://git.sr.ht/~grauwoelfchen/adequate
 
+```zsh
+# the main branch is "trunk"
+% git clone git@gitlab.com:grauwoelfchen/adequate.git
+% git --no-pager branch -v
+* trunk xxxxxxx XXX
+```
 
 ## Installation
 
@@ -109,15 +116,15 @@ file.
 
 ### Unreleased commits
 
-[v0.1.0...trunk](
-https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.0...trunk)
+[v0.1.1...trunk](
+https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.1...trunk)
 
 
 ## License
 
 ```text
 Adequate
-Copyright 2020 Yasuhiro Яша Asaka
+Copyright 2020-2021 Yasuhiro Яша Asaka
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
