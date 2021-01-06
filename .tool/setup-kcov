@@ -15,12 +15,13 @@ set -eu
 # ```
 #
 
+work_dir="$(dirname $(readlink -f "${0}"))/kcov"
+
 # if set KCOV_DISCARD_CACHE=true, then kcov will be force-installed
 force_install="${KCOV_DISCARD_CACHE:-false}"
 
-work_dir="$(dirname $(readlink -f "${0}"))/kcov"
-
-kcov_cmd="${work_dir}/bin/kcov"
+kcov_pfx="${KCOV_PREFIX:-"${work_dir}"}"
+kcov_cmd="${kcov_pfx}/bin/kcov"
 kcov_url="https://github.com/SimonKagstrom/kcov/archive"
 kcov_ver="v38"
 
@@ -39,7 +40,7 @@ else
   mkdir build
   cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$work_dir
+    -DCMAKE_INSTALL_PREFIX=$kcov_pfx
   make
   make install
 fi
