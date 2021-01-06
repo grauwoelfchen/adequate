@@ -28,6 +28,9 @@ exclude = [
 lazy_static = "1.4"
 strfmt = "0.1.6"
 
+[badges]
+gitlab = { repository = "grauwoelfchen/adequate", branch = "trunk" }
+
 [dev-dependencies.cargo-husky]
 version = "1"
 default-features = false

@@ -1,10 +1,10 @@
 # Adequate
 
 [![pipeline](
-https://gitlab.com/grauwoelfchen/adequate/badges/master/pipeline.svg)](
-https://gitlab.com/grauwoelfchen/adequate/commits/master) [![coverage](
-https://gitlab.com/grauwoelfchen/adequate/badges/master/coverage.svg)](
-https://gitlab.com/grauwoelfchen/adequate/commits/master)
+https://gitlab.com/grauwoelfchen/adequate/badges/trunk/pipeline.svg)](
+https://gitlab.com/grauwoelfchen/adequate/commits/trunk) [![coverage](
+https://gitlab.com/grauwoelfchen/adequate/badges/trunk/coverage.svg)](
+https://gitlab.com/grauwoelfchen/adequate/commits/trunk)
 
 A yet another validation library provides a macro inspired by [Accord](
 https://github.com/ChrisBuchholz/accord).
@@ -106,8 +106,8 @@ file.
 
 ### Unreleased commits
 
-[v0.1.0...master](
-https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.0...master)
+[v0.1.0...trunk](
+https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.0...trunk)
 
 
 ## License
