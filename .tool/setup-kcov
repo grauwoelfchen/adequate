@@ -1,30 +1,46 @@
-#!/bin/bash
+#!/bin/sh
+
 set -eu
 
-# NOTE:
-# if set KCOV_DISCARD_CACHE=true, then it will force installing kcov)
+# Dependencies
+#
+# ```zsh
+# # e.g. on Gentoo Linux
+# % sudo emerge -av \
+#   dev-libs/elfutils \
+#   dev-util/cmake \
+#   sys-devel/make \
+#   net-misc/curl \
+#   app-arch/tar
+# ```
+#
 
-renew="${KCOV_DISCARD_CACHE:-false}"
+work_dir="$(dirname $(readlink -f "${0}"))/kcov"
 
-kcov_dir="$(dirname $(readlink -f "${0}"))/kcov"
-kcov_cmd="${KCOV_PATH:-${kcov_dir}/bin/kcov}"
+# if set KCOV_DISCARD_CACHE=true, then kcov will be force-installed
+force_install="${KCOV_DISCARD_CACHE:-false}"
+
+kcov_pfx="${KCOV_PREFIX:-"${work_dir}"}"
+kcov_cmd="${kcov_pfx}/bin/kcov"
 kcov_url="https://github.com/SimonKagstrom/kcov/archive"
-kcov_ver="v34"
+kcov_ver="v38"
 
-if [[ -f "${kcov_cmd}" && "${renew}" != "true" ]]; then
-  echo "kcov already installed in ${kcov_cmd}"
+if [[ -f "${kcov_cmd}" && "${force_install}" != "true" ]]; then
+  echo "kcov already installed at ${kcov_cmd}"
 else
-  rm -fr $kcov_dir
-  mkdir $kcov_dir
-  cd $kcov_dir
+  rm -fr $work_dir
+  mkdir $work_dir
+  cd $work_dir
+
   curl -sLO ${kcov_url}/${kcov_ver}.tar.gz
   mkdir $kcov_ver
   tar zxvf ${kcov_ver}.tar.gz -C $kcov_ver --strip-components=1
+
   cd $kcov_ver
   mkdir build
   cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/
+    -DCMAKE_INSTALL_PREFIX=$kcov_pfx
   make
-  make install DESTDIR=../
+  make install
 fi
