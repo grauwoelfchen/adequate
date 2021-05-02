@@ -48,7 +48,7 @@ test\:all: test\:doc test\:lib ## Run all tests
 
 # coverage
 coverage\:lib: ## Generate a coverage report of tests for library [alias: cov:lib]
-	set -uo pipefail; \
+	@set -uo pipefail; \
 	dir="$$(pwd)"; \
 	target_dir="$${dir}/target/coverage/lib"; \
 	cargo test --lib --no-run --target-dir=$${target_dir}; \
