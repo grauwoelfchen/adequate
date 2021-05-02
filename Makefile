@@ -111,6 +111,10 @@ package: ## Create package
 	@cargo package
 .PHONY: package
 
+publish: ## Publish package
+	@cargo publish
+.PHONY: publish
+
 help: ## Display this message
 	@set -uo pipefail; \
 	grep --extended-regexp '^[-_0-9a-z\%\:\\ ]+: ' \
