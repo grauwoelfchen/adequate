@@ -4,7 +4,7 @@ stages:
   - build
 
 .vet-tools: &vet-tools
-  image: grauwoelfchen/rust-vet-tools:stable
+  image: registry.gitlab.com/grauwoelfchen/portolan/rust-vet-tools:stable
   except:
     - tags
 
@@ -66,7 +66,7 @@ test-unit:
 
 build-debug:
   stage: build
-  image: grauwoelfchen/rust:stable
+  image: registry.gitlab.com/grauwoelfchen/portolan/rust:stable
   before_script:
     - rustc --version
     - cargo --version
@@ -80,7 +80,7 @@ build-debug:
 
 build-release:
   stage: build
-  image: grauwoelfchen/rust:stable
+  image: registry.gitlab.com/grauwoelfchen/portolan/rust:stable
   before_script:
     - rustc --version
     - cargo --version
