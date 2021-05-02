@@ -1,4 +1,6 @@
 Sun 02 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Add docs (pages) for adequate.yasha.rs
+	* Update base image for CI (use them from registry.gitlab.com)
 	* Remove .tool
 
 Wed 06 Jan 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
