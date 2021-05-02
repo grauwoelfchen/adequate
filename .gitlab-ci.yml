@@ -2,6 +2,7 @@ stages:
   - verify
   - test
   - build
+  - pages
 
 .vet-tools: &vet-tools
   image: registry.gitlab.com/grauwoelfchen/portolan/rust-vet-tools:stable
@@ -91,3 +92,22 @@ build-release:
     untracked: true
   only:
     - tags
+
+pages:
+  stage: pages
+  image: grauwoelfchen/rust:stable
+  before_script:
+    - rustc --version
+    - cargo --version
+    - rustdoc --version
+  script:
+    - make doc
+    - mkdir public
+    - cp -R target/doc/* public/
+    - cd public/ && ln -s adequate/index.html .
+  artifacts:
+    untracked: true
+    paths:
+      - public
+  only:
+    - trunk
