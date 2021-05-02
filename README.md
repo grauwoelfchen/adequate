@@ -89,6 +89,9 @@ Check `make help`
 
 ```zsh
 % make test
+
+# or check the report by kcov
+% make coverage
 ```
 
 ### CI
@@ -98,14 +101,11 @@ See `.gitlab-ci.yml`.
 
 
 ```zsh
-# install gitlab-runner into .tools
-% .tool/setup-gitlab-runner
-
 # prepare environment variables for CI via .env.ci
 % cp .env.ci.sample .env
 
 # e.g. test (see .gitlab-ci.yml)
-% .tool/ci-runner test
+% make runner-test
 ```
 
 

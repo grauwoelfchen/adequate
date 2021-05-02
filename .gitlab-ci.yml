@@ -40,7 +40,7 @@ lint:
   script:
     - make verify:lint
 
-test:
+test-doc:
   stage: test
   <<: *vet-tools
   before_script:
@@ -49,12 +49,22 @@ test:
     - kcov --version
     - mkdir -p .git/hooks
   script:
-    # test & get covered
-    - KCOV_PFX=/usr/bin/ make coverage
+    - make test:doc
+
+test-unit:
+  stage: test
+  <<: *vet-tools
+  before_script:
+    - rustc --version
+    - cargo --version
+    - kcov --version
+    - mkdir -p .git/hooks
+  script:
+    - make coverage
   after_script:
     - cat target/coverage/index.js
 
-build:
+build-debug:
   stage: build
   image: grauwoelfchen/rust:stable
   before_script:
@@ -68,7 +78,7 @@ build:
   only:
     - master
 
-release:
+build-release:
   stage: build
   image: grauwoelfchen/rust:stable
   before_script:

@@ -16,12 +16,16 @@ repository = "https://gitlab.com/grauwoelfchen/adequate"
 license = "Apache-2.0"
 
 exclude = [
-  ".cargo-huskey/*",
+  ".cargo-husky",
+  ".cache",
   "Makefile",
-  "/.env",
-  "/.env.ci.sample",
-  "/.clippy.toml",
-  "/.rustfmt.toml",
+  "rust-toolchain",
+  ".env",
+  ".env.ci.sample",
+  ".gitignore",
+  ".clippy.toml",
+  ".rustfmt.toml",
+  ".gitlab-ci.yml",
 ]
 
 [dependencies]
