@@ -61,9 +61,9 @@ test-unit:
     - kcov --version
     - mkdir -p .git/hooks
   script:
-    - make coverage
+    - make coverage:lib
   after_script:
-    - cat target/coverage/index.js
+    - cat target/coverage/lib/index.js
 
 build-debug:
   stage: build
