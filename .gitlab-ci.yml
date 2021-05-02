@@ -77,7 +77,7 @@ build-debug:
   cache:
     untracked: true
   only:
-    - master
+    - trunk
 
 build-release:
   stage: build
