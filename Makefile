@@ -1,14 +1,14 @@
 PACKAGE = adequate
 
 # verify
-verify\:check: ## Verify code syntax [alias: check]
+verify\:check: ## Verify code syntax [synonym: check]
 	@cargo check --all --verbose
 .PHONY: verify\:check
 
 check: verify\:check
 .PHONY: check
 
-verify\:format: ## Verify format without changes [alias: verify:fmt, format, fmt]
+verify\:format: ## Verify format without changes [synonym: verify:fmt, format, fmt]
 	@cargo fmt --all -- --check
 .PHONY: verify\:format
 
@@ -18,7 +18,7 @@ format: verify\:format
 fmt: verify\:format
 .PHONY: fmt
 
-verify\:lint: ## Verify coding style using clippy [alias: lint]
+verify\:lint: ## Verify coding style using clippy [synonym: lint]
 	@cargo clippy --all-targets
 .PHONY: verify\:lint
 
@@ -28,7 +28,7 @@ lint: verify\:lint
 verify\:all: verify\:check verify\:format verify\:lint ## Check code using all verify targets
 .PHONY: verify\:all
 
-verify: verify\:check ## Synonym for verify:check
+verify: verify\:check ## Alias for verify:check
 .PHONY: verify
 
 # test
@@ -40,14 +40,14 @@ test\:lib: ## Run unit tests
 	@cargo test --tests
 .PHONY: test\:lib
 
-test: test\:lib ## Synonym for test:lib
+test: test\:lib ## Alias for test:lib
 .PHONY: test
 
 test\:all: test\:doc test\:lib ## Run all tests
 .PHONY: test\:all
 
 # coverage
-coverage\:lib: ## Generate a coverage report of tests for library [alias: cov:lib]
+coverage\:lib: ## Generate a coverage report of tests for library [synonym: cov:lib]
 	@set -uo pipefail; \
 	dir="$$(pwd)"; \
 	target_dir="$${dir}/target/coverage/lib"; \
@@ -66,14 +66,14 @@ coverage\:lib: ## Generate a coverage report of tests for library [alias: cov:li
 cov\:lib: coverage\:lib
 .PHONY: cov\:lib
 
-coverage: coverage\:lib ## Synonym for coverage:lib [alias: cov]
+coverage: coverage\:lib ## Alias for coverage:lib [synonym: cov]
 .PHONY: coverage
 
 cov: coverage
 .PHONY: cov
 
 # documentation
-document: ## Generate documentation files [alias: doc]
+document: ## Generate documentation files [synonym: doc]
 	cargo rustdoc --package $(PACKAGE)
 .PHONY: document
 
@@ -86,7 +86,7 @@ build\:debug: ## Build in debug mode
 	cargo build
 .PHONY: build\:debug
 
-build: build\:debug ## Synonym for build:debug
+build: build\:debug ## Alias for build:debug
 .PHONY: build
 
 build\:release: ## Create release build
