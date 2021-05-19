@@ -58,6 +58,10 @@ assert!(result.is_err());
 
 ### Validations
 
+###### Contain
+
+* contains
+
 ###### Length
 
 * max
@@ -116,7 +120,7 @@ file.
 
 ### Unreleased commits
 
-[v0.1.1...trunk](
+[v0.1.2...trunk](
 https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.1...trunk)
 
 
