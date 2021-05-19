@@ -48,3 +48,44 @@ lazy_static! {
         ("within", "Must be chars length within a range of {0}-{1}"),
     ];
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_fmt() {
+        let m = Message {
+            text: "lorem ipsum {0}".to_string(),
+            args: vec!["dolor sit amet".to_string()],
+        };
+        assert_eq!(format!("{}", m), "lorem ipsum dolor sit amet".to_string());
+    }
+
+    #[test]
+    fn test_eq() {
+        let a = Message {
+            text: "lorem ipsum {0}".to_string(),
+            args: vec!["dolor sit amet".to_string()],
+        };
+        assert!(a.eq(&a));
+
+        let b = Message {
+            text: "lorem ipsum {0}".to_string(),
+            args: vec!["dolor sit amet".to_string()],
+        };
+        assert!(a.eq(&b));
+
+        let c = Message {
+            text: "".to_string(),
+            args: vec!["dolor ist amet".to_string()],
+        };
+        assert!(!a.eq(&c));
+
+        let d = Message {
+            text: "lorem ipsum {0}".to_string(),
+            args: vec!["".to_string()],
+        };
+        assert!(!a.eq(&d));
+    }
+}
