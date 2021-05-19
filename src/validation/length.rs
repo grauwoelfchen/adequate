@@ -1,34 +1,11 @@
-use std::collections::HashMap;
 use std::ops::Range;
 
-use crate::Message;
-use crate::validation::ValidationResult;
-
-// TODO: any idea for i18n?
-lazy_static! {
-    static ref MESSAGES: [(&'static str, &'static str); 3] = [
-        ("max", "Must not contain more characters than {0}"),
-        ("min", "Must not contain less characters than {0}"),
-        ("within", "Must be chars length within a range of {0}-{1}"),
-    ];
-}
-
-fn len(err: bool, key: &str, args: Vec<String>) -> ValidationResult {
-    if err {
-        let m: HashMap<&str, &str> = MESSAGES.iter().cloned().collect();
-        Err(Message {
-            text: m.get(key).unwrap_or(&"").to_string(),
-            args,
-        })
-    } else {
-        Ok(())
-    }
-}
+use crate::validation::{handle, ValidationResult};
 
 /// Check if the given string has length more than max.
 pub fn max(size: usize) -> Box<dyn Fn(&String) -> ValidationResult> {
     Box::new(move |s: &String| {
-        len(s.len() > size, "max", vec![size.to_string()])
+        handle(s.len() > size, "max", vec![size.to_string()])
     })
 }
 
@@ -45,7 +22,7 @@ pub fn max_if_present(
 /// Check if the given string has length less than min.
 pub fn min(size: usize) -> Box<dyn Fn(&String) -> ValidationResult> {
     Box::new(move |s: &String| {
-        len(s.len() < size, "min", vec![size.to_string()])
+        handle(s.len() < size, "min", vec![size.to_string()])
     })
 }
 
@@ -63,7 +40,7 @@ pub fn min_if_present(
 /// (exclusive).
 pub fn within(r: Range<usize>) -> Box<dyn Fn(&String) -> ValidationResult> {
     Box::new(move |s: &String| {
-        len(
+        handle(
             !r.contains(&s.len()),
             "within",
             vec![r.start.to_string(), (r.end - 1).to_string()],

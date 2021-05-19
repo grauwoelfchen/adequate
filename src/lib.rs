@@ -2,90 +2,14 @@
 extern crate lazy_static;
 extern crate strfmt;
 
-use std::collections::HashMap;
-use std::fmt;
+mod error;
+pub use error::Error;
 
-use strfmt::strfmt;
+mod feedback;
+pub use feedback::Feedback;
 
-/// Message struct holds validation error message and its arguments as
-/// interpolation.
-#[derive(Clone, Debug)]
-pub struct Message {
-    pub text: String,
-    pub args: Vec<String>,
-}
-
-impl fmt::Display for Message {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let mut args = HashMap::new();
-        for (i, a) in self.args.iter().enumerate() {
-            args.insert(i.to_string(), a);
-        }
-        // panic if identifiers in template text won't match
-        let out = strfmt(&self.text, &args).expect("message format is invalid");
-        if !args.is_empty() && self.text == out {
-            panic!("message does not have expected number of identifiers");
-        }
-        write!(f, "{}", out)
-    }
-}
-
-impl PartialEq for Message {
-    fn eq(&self, other: &Self) -> bool {
-        if self.text != other.text {
-            return false;
-        }
-        for (i, a) in self.args.iter().enumerate() {
-            if a != &other.args[i] {
-                return false;
-            }
-        }
-        true
-    }
-}
-
-/// Feedback struct contains target field name and multiple Message objects if
-/// the context is negative (otherwise it will be an empty vector).
-#[derive(Clone, Debug)]
-pub struct Feedback {
-    pub field: String,
-    pub messages: Vec<Message>,
-}
-
-impl Feedback {
-    pub fn is_negative(&self) -> bool {
-        !self.messages.is_empty()
-    }
-}
-
-impl PartialEq for Feedback {
-    fn eq(&self, other: &Self) -> bool {
-        if self.field != other.field {
-            return false;
-        }
-        for (i, m) in self.messages.iter().enumerate() {
-            if m != &other.messages[i] {
-                return false;
-            }
-        }
-        true
-    }
-}
-
-/// Error is an enum struct wraps multiple feedback.
-#[derive(Clone, Debug)]
-pub struct Error(pub Vec<Feedback>);
-
-impl PartialEq for Error {
-    fn eq(&self, other: &Self) -> bool {
-        for (i, f) in self.0.iter().enumerate() {
-            if f != &other.0[i] {
-                return false;
-            }
-        }
-        true
-    }
-}
+mod message;
+pub use message::Message;
 
 pub mod validation;
 
