@@ -31,12 +31,7 @@ impl PartialEq for Message {
         if self.text != other.text {
             return false;
         }
-        for (i, a) in self.args.iter().enumerate() {
-            if a != &other.args[i] {
-                return false;
-            }
-        }
-        true
+        self.args == other.args
     }
 }
 
@@ -66,25 +61,25 @@ mod test {
     fn test_eq() {
         let a = Message {
             text: "lorem ipsum {0}".to_string(),
-            args: vec!["dolor sit amet".to_string()],
+            args: Vec::new(),
         };
         assert!(a.eq(&a));
 
         let b = Message {
             text: "lorem ipsum {0}".to_string(),
-            args: vec!["dolor sit amet".to_string()],
+            args: Vec::new(),
         };
         assert!(a.eq(&b));
 
         let c = Message {
             text: "".to_string(),
-            args: vec!["dolor ist amet".to_string()],
+            args: vec!["dolor sit amet".to_string()],
         };
         assert!(!a.eq(&c));
 
         let d = Message {
             text: "lorem ipsum {0}".to_string(),
-            args: vec!["".to_string()],
+            args: vec!["dolor sit amet".to_string()],
         };
         assert!(!a.eq(&d));
     }
