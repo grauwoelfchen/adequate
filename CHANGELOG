@@ -1,4 +1,6 @@
 Wed 19 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Fix bugs in PartialEq for Error, Feedback and Message struct
+	* Split modules into separated files (error, feedback and message)
 	* Add .renovaterc.json (dependencies check by renovate-runner)
 
 Sun 02 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
