@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub use crate::Message;
+use crate::Message;
 use crate::message::MESSAGES;
 
 pub type ValidationResult = std::result::Result<(), Message>;
