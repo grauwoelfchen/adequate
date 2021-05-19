@@ -5,6 +5,7 @@ use crate::message::MESSAGES;
 
 pub type ValidationResult = std::result::Result<(), Message>;
 
+pub mod contain;
 pub mod length;
 
 fn handle(err: bool, key: &str, args: Vec<String>) -> ValidationResult {
