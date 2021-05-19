@@ -1,4 +1,8 @@
+Thu 20 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Add a new validation method "contains"
+
 Wed 19 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* New release v0.1.2
 	* Fix bugs in PartialEq for Error, Feedback and Message struct
 	* Split modules into separated files (error, feedback and message)
 	* Add .renovaterc.json (dependencies check by renovate-runner)
