@@ -37,11 +37,12 @@ impl PartialEq for Message {
 
 // TODO: any idea for i18n?
 lazy_static! {
-    pub static ref MESSAGES: [(&'static str, &'static str); 4] = [
+    pub static ref MESSAGES: [(&'static str, &'static str); 5] = [
         ("max", "Must not contain more characters than {0}"),
         ("min", "Must not contain less characters than {0}"),
         ("within", "Must be chars length within a range of {0}-{1}"),
         ("contains", "Must contain {0}"),
+        ("contains_if_given", "Must contain {0}"),
     ];
 }
 
