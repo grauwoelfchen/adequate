@@ -84,11 +84,11 @@ Check `make help`
 
 ## Development
 
-### Verify
+### vet
 
 ```zsh
-# check code using all verify:xxx targets
-% make verify:all
+# check code using all vet:xxx targets
+% make vet:all
 ```
 
 ### Test
