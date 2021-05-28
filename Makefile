@@ -1,35 +1,35 @@
 PACKAGE = adequate
 
-# verify
-verify\:check: ## Verify code syntax [synonym: check]
+# vet
+vet\:check: ## vet code syntax [synonym: check]
 	@cargo check --all --verbose
-.PHONY: verify\:check
+.PHONY: vet\:check
 
-check: verify\:check
+check: vet\:check
 .PHONY: check
 
-verify\:format: ## Verify format without changes [synonym: verify:fmt, format, fmt]
+vet\:format: ## vet format without changes [synonym: vet:fmt, format, fmt]
 	@cargo fmt --all -- --check
-.PHONY: verify\:format
+.PHONY: vet\:format
 
-format: verify\:format
+format: vet\:format
 .PHONY: format
 
-fmt: verify\:format
+fmt: vet\:format
 .PHONY: fmt
 
-verify\:lint: ## Verify coding style using clippy [synonym: lint]
+vet\:lint: ## vet coding style using clippy [synonym: lint]
 	@cargo clippy --all-targets
-.PHONY: verify\:lint
+.PHONY: vet\:lint
 
-lint: verify\:lint
+lint: vet\:lint
 .PHONY: lint
 
-verify\:all: verify\:check verify\:format verify\:lint ## Check code using all verify targets
-.PHONY: verify\:all
+vet\:all: vet\:check vet\:format vet\:lint ## Check code using all vet targets
+.PHONY: vet\:all
 
-verify: verify\:check ## Alias for verify:check
-.PHONY: verify
+vet: vet\:check ## Alias for vet:check
+.PHONY: vet
 
 # test
 test\:doc: ## Run only doc tests
