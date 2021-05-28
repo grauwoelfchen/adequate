@@ -1,3 +1,6 @@
+Sat 29 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Add a new validation method "contains_if_given"
+
 Sat 22 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new validation method "contains_if_present"
 

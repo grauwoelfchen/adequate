@@ -62,6 +62,7 @@ assert!(result.is_err());
 
 * contains
 * contains_if_present
+* contains_if_given
 
 ###### Length
 
