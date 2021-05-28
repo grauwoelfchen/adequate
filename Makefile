@@ -1,14 +1,14 @@
 PACKAGE = adequate
 
 # vet
-vet\:check: ## vet code syntax [synonym: check]
+vet\:check: # vet code syntax [synonym: check]
 	@cargo check --all --verbose
 .PHONY: vet\:check
 
 check: vet\:check
 .PHONY: check
 
-vet\:format: ## vet format without changes [synonym: vet:fmt, format, fmt]
+vet\:format: # vet format without changes [synonym: vet:fmt, format, fmt]
 	@cargo fmt --all -- --check
 .PHONY: vet\:format
 
@@ -18,36 +18,36 @@ format: vet\:format
 fmt: vet\:format
 .PHONY: fmt
 
-vet\:lint: ## vet coding style using clippy [synonym: lint]
+vet\:lint: # vet coding style using clippy [synonym: lint]
 	@cargo clippy --all-targets
 .PHONY: vet\:lint
 
 lint: vet\:lint
 .PHONY: lint
 
-vet\:all: vet\:check vet\:format vet\:lint ## Check code using all vet targets
+vet\:all: vet\:check vet\:format vet\:lint # Check code using all vet targets
 .PHONY: vet\:all
 
-vet: vet\:check ## Alias for vet:check
+vet: vet\:check # Alias for vet:check
 .PHONY: vet
 
 # test
-test\:doc: ## Run only doc tests
+test\:doc: # Run only doc tests
 	@cargo test --doc
 .PHONY: test\:doc
 
-test\:lib: ## Run unit tests
+test\:lib: # Run unit tests
 	@cargo test --tests
 .PHONY: test\:lib
 
-test: test\:lib ## Alias for test:lib
+test: test\:lib # Alias for test:lib
 .PHONY: test
 
-test\:all: test\:doc test\:lib ## Run all tests
+test\:all: test\:doc test\:lib # Run all tests
 .PHONY: test\:all
 
 # coverage
-coverage\:lib: ## Generate a coverage report of tests for library [synonym: cov:lib]
+coverage\:lib: # Generate a coverage report of tests for library [synonym: cov:lib]
 	@set -uo pipefail; \
 	dir="$$(pwd)"; \
 	target_dir="$${dir}/target/coverage/lib"; \
@@ -66,14 +66,14 @@ coverage\:lib: ## Generate a coverage report of tests for library [synonym: cov:
 cov\:lib: coverage\:lib
 .PHONY: cov\:lib
 
-coverage: coverage\:lib ## Alias for coverage:lib [synonym: cov]
+coverage: coverage\:lib # Alias for coverage:lib [synonym: cov]
 .PHONY: coverage
 
 cov: coverage
 .PHONY: cov
 
 # documentation
-document: ## Generate documentation files [synonym: doc]
+document: # Generate documentation files [synonym: doc]
 	cargo rustdoc --package $(PACKAGE)
 .PHONY: document
 
@@ -82,26 +82,26 @@ doc: document
 # }}}
 
 # build
-build\:debug: ## Build in debug mode
+build\:debug: # Build in debug mode
 	cargo build
 .PHONY: build\:debug
 
-build: build\:debug ## Alias for build:debug
+build: build\:debug # Alias for build:debug
 .PHONY: build
 
-build\:release: ## Create release build
+build\:release: # Create release build
 	cargo build --release
 .PHONY: build\:release
 
 # utility
-clean: ## Clean up
+clean: # Clean up
 	@cargo clean
 .PHONY: clean
 
 # NOTE:
 # This depends on environment variables from .env.ci, and requires
 # the gitlab-runner command.
-runner-%: ## Run a CI job on local (on Docker)
+runner-%: # Run a CI job on local (on Docker)
 	@set -uo pipefail; \
 	job=$(subst runner-,,$@); \
 	opt=""; \
@@ -116,22 +116,20 @@ runner-%: ## Run a CI job on local (on Docker)
 		$${opt} $${job}
 .PHONY: runner
 
-package: ## Create package
+package: # Create package
 	@cargo package
 .PHONY: package
 
-publish: ## Publish package
+publish: # Publish package
 	@cargo publish
 .PHONY: publish
 
-help: ## Display this message
-	@set -uo pipefail; \
-	grep --extended-regexp '^[-_0-9a-z\%\:\\ ]+: ' \
-		$(firstword $(MAKEFILE_LIST)) | \
-		grep --extended-regexp ' ## ' | \
-		sed --expression='s/\( [-_0-9a-z\%\:\\ ]*\) #/ #/' | \
+help: # Display this message
+	@grep --extended-regexp '^[0-9a-z\:\\\%]+: ' $(firstword $(MAKEFILE_LIST)) | \
+		grep --extended-regexp ' # ' | \
+		sed --expression='s/\([a-z0-9\-\:\ ]*\): \([a-z0-9\-\:\ ]*\) #/\1: #/g' | \
 		tr --delete \\\\ | \
-		awk 'BEGIN {FS = ": ## "}; \
+		awk 'BEGIN {FS = ": # "}; \
 			{printf "\033[38;05;222m%-14s\033[0m %s\n", $$1, $$2}' | \
 		sort
 .PHONY: help
