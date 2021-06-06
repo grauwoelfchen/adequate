@@ -1,6 +1,6 @@
 use crate::validation::{handle, ValidationResult};
 
-/// Check if the given string contains another string.
+/// Check if the string contains another string.
 pub fn contains(
     part: &'static str,
 ) -> Box<dyn Fn(&String) -> ValidationResult> {
@@ -9,7 +9,7 @@ pub fn contains(
     })
 }
 
-/// Check if a string does not contain another string.
+/// Check if a string contains another string when given.
 pub fn contains_if_given(
     part: Option<&'static str>,
 ) -> Box<dyn Fn(&str) -> ValidationResult> {
@@ -23,7 +23,21 @@ pub fn contains_if_given(
     })
 }
 
-/// Check if the given string contains another string when it exists.
+/// Check if a string does not contain another string when given.
+pub fn not_contain_if_given(
+    part: Option<&'static str>,
+) -> Box<dyn Fn(&str) -> ValidationResult> {
+    let p = part.unwrap_or_default();
+    Box::new(move |s: &str| {
+        handle(
+            !p.is_empty() && s.contains(&p),
+            "not_contain",
+            vec![p.to_string()],
+        )
+    })
+}
+
+/// Check if the string contains another string when it exists.
 pub fn contains_if_present(
     part: &'static str,
 ) -> Box<dyn Fn(&Option<String>) -> ValidationResult> {
@@ -94,6 +108,43 @@ mod test {
         assert_eq!(
             result.map_err(|e| e.to_string()),
             Err("Must contain dolor sit amet".to_string())
+        );
+    }
+
+    // not_contain_if_given
+    #[test]
+    fn test_not_contain_if_given_ok() {
+        let part = "lorem ipsum".to_string();
+
+        let f = not_contain_if_given(None);
+        let result = f(&part);
+        assert!(result.is_ok());
+
+        let f = not_contain_if_given(Some(""));
+        let result = f(&part);
+        assert!(result.is_ok());
+
+        let f = not_contain_if_given(Some("dolor sit amet"));
+        let result = f(&part);
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_not_contain_if_given_err() {
+        let part = "lorem ipsum".to_string();
+
+        let f = not_contain_if_given(Some("ipsum"));
+        let result = f(&part);
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_not_contain_if_given_message() {
+        let f = not_contain_if_given(Some("dolor"));
+        let result = f(&"dolor sit amet".to_string());
+        assert_eq!(
+            result.map_err(|e| e.to_string()),
+            Err("Must not contain dolor".to_string())
         );
     }
 

@@ -42,7 +42,7 @@ lazy_static! {
         ("min", "Must not contain less characters than {0}"),
         ("within", "Must be chars length within a range of {0}-{1}"),
         ("contains", "Must contain {0}"),
-        ("contains_if_given", "Must contain {0}"),
+        ("not_contain", "Must not contain {0}"),
     ];
 }
 
