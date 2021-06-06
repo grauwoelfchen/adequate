@@ -74,7 +74,7 @@ mod test {
         let result = f(&"test".to_string());
         assert_eq!(
             result.map_err(|e| e.to_string()),
-            Err("Must not contain more characters than 3".to_string())
+            Err("Must not have more characters than 3".to_string())
         );
     }
 
@@ -105,7 +105,7 @@ mod test {
         let result = f(&Some("test".to_string()));
         assert_eq!(
             result.map_err(|e| e.to_string()),
-            Err("Must not contain more characters than 3".to_string())
+            Err("Must not have more characters than 3".to_string())
         );
     }
 
@@ -131,7 +131,7 @@ mod test {
         let result = f(&"test".to_string());
         assert_eq!(
             result.map_err(|e| e.to_string()),
-            Err("Must not contain less characters than 9".to_string())
+            Err("Must not have less characters than 9".to_string())
         );
     }
 
@@ -162,7 +162,7 @@ mod test {
         let result = f(&Some("test".to_string()));
         assert_eq!(
             result.map_err(|e| e.to_string()),
-            Err("Must not contain less characters than 9".to_string())
+            Err("Must not have less characters than 9".to_string())
         );
     }
 

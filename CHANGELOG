@@ -1,4 +1,5 @@
 Sun 06 Jun 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Change error messages for max/min validations (contain -> have)
 	* Add a new validation method "not_contain_if_given"
 
 Sat 29 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
