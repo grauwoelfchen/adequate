@@ -14,7 +14,7 @@ pub fn max_if_present(
     size: usize,
 ) -> Box<dyn Fn(&Option<String>) -> ValidationResult> {
     Box::new(move |s: &Option<String>| match &s {
-        Some(v) => max(size)(&v),
+        Some(v) => max(size)(v),
         None => Ok(()),
     })
 }
@@ -31,7 +31,7 @@ pub fn min_if_present(
     size: usize,
 ) -> Box<dyn Fn(&Option<String>) -> ValidationResult> {
     Box::new(move |s: &Option<String>| match &s {
-        Some(v) => min(size)(&v),
+        Some(v) => min(size)(v),
         None => Ok(()),
     })
 }

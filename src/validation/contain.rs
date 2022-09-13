@@ -42,7 +42,7 @@ pub fn contains_if_present(
     part: &'static str,
 ) -> Box<dyn Fn(&Option<String>) -> ValidationResult> {
     Box::new(move |s: &Option<String>| match &s {
-        Some(v) => contains(part)(&v),
+        Some(v) => contains(part)(v),
         None => Ok(()),
     })
 }
@@ -97,14 +97,14 @@ mod test {
     #[test]
     fn test_contains_if_given_err() {
         let f = contains_if_given(Some("dolor sit amet"));
-        let result = f(&"lorem ipsum".to_string());
+        let result = f("lorem ipsum");
         assert!(result.is_err());
     }
 
     #[test]
     fn test_contains_if_given_err_message() {
         let f = contains_if_given(Some("dolor sit amet"));
-        let result = f(&"lorem ipsum".to_string());
+        let result = f("lorem ipsum");
         assert_eq!(
             result.map_err(|e| e.to_string()),
             Err("Must contain dolor sit amet".to_string())
@@ -141,7 +141,7 @@ mod test {
     #[test]
     fn test_not_contain_if_given_message() {
         let f = not_contain_if_given(Some("dolor"));
-        let result = f(&"dolor sit amet".to_string());
+        let result = f("dolor sit amet");
         assert_eq!(
             result.map_err(|e| e.to_string()),
             Err("Must not contain dolor".to_string())
