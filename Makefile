@@ -74,7 +74,7 @@ cov: coverage
 
 # documentation
 document: # Generate documentation files [synonym: doc]
-	cargo rustdoc --package $(PACKAGE)
+	cargo doc --no-deps --package $(PACKAGE)
 .PHONY: document
 
 doc: document

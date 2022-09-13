@@ -102,9 +102,11 @@ pages:
     - rustdoc --version
   script:
     - make doc
+    - >
+      echo "<meta http-equiv=\"refresh\" content=\"0; url=adequate\">"
+        > ./target/doc/index.html
     - mkdir public
-    - cp -R target/doc/* public/
-    - cd public/ && ln -s adequate/index.html .
+    - cp -R ./target/doc/* public/
   artifacts:
     untracked: true
     paths:
