@@ -3,7 +3,10 @@ use std::collections::HashMap;
 use crate::Message;
 use crate::message::MESSAGES;
 
-pub type ValidationResult = std::result::Result<(), Message>;
+type ValidationResult = std::result::Result<(), Message>;
+
+pub type Validator = dyn Fn(&str) -> ValidationResult;
+pub type OptionalValidator = dyn Fn(Option<&str>) -> ValidationResult;
 
 pub mod contain;
 pub mod length;

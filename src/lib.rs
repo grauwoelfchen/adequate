@@ -25,7 +25,7 @@ pub mod validation;
 /// # use adequate::validation::length;
 ///
 /// # fn main() {
-///     let text = "lorem ipsum dolor sit amet".to_string();
+///     let text = "lorem ipsum dolor sit amet";
 ///
 ///     let result = validate! {
 ///         "name" => text => [length::max(9)]
@@ -81,7 +81,7 @@ macro_rules! validate {
 #[cfg(test)]
 mod test {
     use super::*;
-    use super::validation::ValidationResult;
+    use super::validation::Validator;
 
     #[test]
     fn test_message() {
@@ -153,8 +153,8 @@ mod test {
     #[test]
     fn test_failure() {
         let dummy = "".to_string();
-        let validation = || -> Box<dyn Fn(&String) -> ValidationResult> {
-            Box::new(move |_: &String| {
+        let validation = || -> Box<Validator> {
+            Box::new(move |_: &str| {
                 Err(Message {
                     text: "Error".to_string(),
                     args: vec![],
@@ -171,9 +171,8 @@ mod test {
     #[test]
     fn test_success() {
         let dummy = "".to_string();
-        let validation = || -> Box<dyn Fn(&String) -> ValidationResult> {
-            Box::new(move |_: &String| Ok(()))
-        };
+        let validation =
+            || -> Box<Validator> { Box::new(move |_: &str| Ok(())) };
 
         let result = validate! {
             "input" => dummy => [validation()]
