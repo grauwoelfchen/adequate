@@ -1,3 +1,10 @@
+Sat 26 Aug 2023 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+	* Reduce the use of String and Option<String> in structs. So that
+	users can reuse built validator function without creating unnecessary string
+	objects again
+	* Create Validator and OptionalValidator types
+	* Remove public access to ValidatinResult type
+
 Wed 14 Sep 2022 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
 	* Fix warnings by checks of the latest clippy (stable)
 
