@@ -46,12 +46,12 @@ See `src/validation` directory for validators.
 use adequate::validation::length;
 
 // inputs
-let fullname = "Albrecht Dürer".to_string();
-let username = "albrecht".to_string();
+let v1 = "Albrecht Dürer";
+let v2 = "albrecht";
 
 let result = validate! {
-    "fullname" => fullname => [length::max(3)],
-    "username" => username => [length::within(3..9)]
+    "fullname" => v1 => [length::max(3)],
+    "username" => v2 => [length::within(3..9)],
 };
 assert!(result.is_err());
 ```
@@ -131,7 +131,7 @@ https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.1...trunk)
 
 ```text
 Adequate
-Copyright 2020-2021 Yasuhiro Яша Asaka
+Copyright 2020-2023 Yasuhiro Яша Asaka
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
