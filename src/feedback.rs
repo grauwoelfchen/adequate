@@ -4,7 +4,7 @@ use crate::message::Message;
 /// the context is negative (otherwise it will be an empty vector).
 #[derive(Clone, Debug)]
 pub struct Feedback {
-    pub field: String,
+    pub field: &'static str,
     pub messages: Vec<Message>,
 }
 
@@ -30,17 +30,17 @@ mod test {
     #[test]
     fn test_is_negative() {
         let f = Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: Vec::new(),
         };
         assert!(!f.is_negative());
 
         let m = Message {
-            text: "lorem ipsum".to_string(),
+            text: "lorem ipsum",
             args: Vec::new(),
         };
         let f = Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: vec![m],
         };
         assert!(f.is_negative());
@@ -49,36 +49,36 @@ mod test {
     #[test]
     fn test_eq() {
         let a = Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: vec![Message {
-                text: "lorem ipsum".to_string(),
+                text: "lorem ipsum",
                 args: Vec::new(),
             }],
         };
         assert!(a.eq(&a));
 
         let b = Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: vec![Message {
-                text: "lorem ipsum".to_string(),
+                text: "lorem ipsum",
                 args: Vec::new(),
             }],
         };
         assert!(a.eq(&b));
 
         let c = Feedback {
-            field: "description".to_string(),
+            field: "description",
             messages: vec![Message {
-                text: "lorem ipsum".to_string(),
+                text: "lorem ipsum",
                 args: Vec::new(),
             }],
         };
         assert!(!a.eq(&c));
 
         let d = Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: vec![Message {
-                text: "lorem ipsum {0}".to_string(),
+                text: "lorem ipsum {0}",
                 args: vec!["dolor sit amet".to_string()],
             }],
         };

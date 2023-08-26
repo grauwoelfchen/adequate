@@ -19,27 +19,27 @@ mod test {
     #[test]
     fn test_eq() {
         let a = Error(vec![Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: Vec::new(),
         }]);
         assert!(a.eq(&a));
 
         let b = Error(vec![Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: Vec::new(),
         }]);
         assert!(a.eq(&b));
 
         let c = Error(vec![Feedback {
-            field: "description".to_string(),
+            field: "description",
             messages: Vec::new(),
         }]);
         assert!(!a.eq(&c));
 
         let d = Error(vec![Feedback {
-            field: "name".to_string(),
+            field: "name",
             messages: vec![Message {
-                text: "lorem ipsum {0}".to_string(),
+                text: "lorem ipsum {0}",
                 args: vec!["dolor sit amet".to_string()],
             }],
         }]);

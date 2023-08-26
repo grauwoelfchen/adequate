@@ -3,11 +3,11 @@ use std::fmt;
 
 use strfmt::strfmt;
 
-/// Message struct holds validation error message and its arguments as
+/// Message struct holds the validation error message and its arguments for
 /// interpolation.
 #[derive(Clone, Debug)]
 pub struct Message {
-    pub text: String,
+    pub text: &'static str,
     pub args: Vec<String>,
 }
 
@@ -18,7 +18,7 @@ impl fmt::Display for Message {
             args.insert(i.to_string(), a);
         }
         // panic if identifiers in template text won't match
-        let out = strfmt(&self.text, &args).expect("message format is invalid");
+        let out = strfmt(self.text, &args).expect("message format is invalid");
         if !args.is_empty() && self.text == out {
             panic!("message does not have expected number of identifiers");
         }
@@ -53,7 +53,7 @@ mod test {
     #[test]
     fn test_fmt() {
         let m = Message {
-            text: "lorem ipsum {0}".to_string(),
+            text: "lorem ipsum {0}",
             args: vec!["dolor sit amet".to_string()],
         };
         assert_eq!(format!("{}", m), "lorem ipsum dolor sit amet".to_string());
@@ -62,25 +62,25 @@ mod test {
     #[test]
     fn test_eq() {
         let a = Message {
-            text: "lorem ipsum {0}".to_string(),
+            text: "lorem ipsum {0}",
             args: Vec::new(),
         };
         assert!(a.eq(&a));
 
         let b = Message {
-            text: "lorem ipsum {0}".to_string(),
+            text: "lorem ipsum {0}",
             args: Vec::new(),
         };
         assert!(a.eq(&b));
 
         let c = Message {
-            text: "".to_string(),
+            text: "",
             args: vec!["dolor sit amet".to_string()],
         };
         assert!(!a.eq(&c));
 
         let d = Message {
-            text: "lorem ipsum {0}".to_string(),
+            text: "lorem ipsum {0}",
             args: vec!["dolor sit amet".to_string()],
         };
         assert!(!a.eq(&d));

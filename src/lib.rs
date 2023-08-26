@@ -35,11 +35,10 @@ pub mod validation;
 ///     let Error(out) = result.unwrap_err();
 ///     assert_eq!(out, vec![
 ///         Feedback {
-///             field: "name".to_string(),
+///             field: "name",
 ///             messages: vec![
 ///                 Message {
-///                   text: "Must not have more characters than {0}"
-///                     .to_string(),
+///                   text: "Must not have more characters than {0}",
 ///                   args: vec!["9".to_string()]
 ///                 }
 ///             ]
@@ -58,7 +57,7 @@ macro_rules! validate {
     ( $( $n:expr => $v:expr => [ $( $c:expr ),* ] ),* ) => {{
         let errors = [$(
             Feedback {
-                field: $n.to_string(),
+                field: $n,
                 messages: [ $( $c(&$v) ),* ]
                     .iter()
                     .cloned()
@@ -86,13 +85,13 @@ mod test {
     #[test]
     fn test_message() {
         let m = Message {
-            text: "lorem ipsum".to_string(),
+            text: "lorem ipsum",
             args: Vec::new(),
         };
         assert_eq!(m.to_string(), "lorem ipsum");
 
         let m = Message {
-            text: "lorem {0}".to_string(),
+            text: "lorem {0}",
             args: vec!["ipsum".to_string()],
         };
         assert_eq!(m.to_string(), "lorem ipsum");
@@ -102,7 +101,7 @@ mod test {
     #[should_panic]
     fn test_message_panic_with_non_numeric_tmpl_ident() {
         let m = Message {
-            text: "lorem ipsum {}".to_string(),
+            text: "lorem ipsum {}",
             args: vec!["dolor".to_string()],
         };
         m.to_string();
@@ -112,7 +111,7 @@ mod test {
     #[should_panic]
     fn test_message_panic_with_missing_ident() {
         let m = Message {
-            text: "lorem ipsum".to_string(),
+            text: "lorem ipsum",
             args: vec!["dolor".to_string()],
         };
         m.to_string();
@@ -122,7 +121,7 @@ mod test {
     #[should_panic]
     fn test_message_panic_with_missing_arg() {
         let m = Message {
-            text: "lorem ipsum {0} {1}".to_string(),
+            text: "lorem ipsum {0} {1}",
             args: vec!["dolor".to_string()],
         };
         m.to_string();
@@ -131,7 +130,7 @@ mod test {
     #[test]
     fn test_feedback_with_positive_result() {
         let f = Feedback {
-            field: "dummy".to_string(),
+            field: "dummy",
             messages: vec![],
         };
         assert!(!f.is_negative());
@@ -140,11 +139,11 @@ mod test {
     #[test]
     fn test_feedback_with_negative_result() {
         let m = Message {
-            text: "lorem ipsum {0}".to_string(),
+            text: "lorem ipsum {0}",
             args: vec!["dolor".to_string()],
         };
         let f = Feedback {
-            field: "dummy".to_string(),
+            field: "dummy",
             messages: vec![m],
         };
         assert!(f.is_negative());
@@ -156,7 +155,7 @@ mod test {
         let validation = || -> Box<Validator> {
             Box::new(move |_: &str| {
                 Err(Message {
-                    text: "Error".to_string(),
+                    text: "Error",
                     args: vec![],
                 })
             })
