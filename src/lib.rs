@@ -56,7 +56,7 @@ pub mod validation;
 #[macro_export]
 macro_rules! validate {
     ( $( $n:expr => $v:expr => [ $( $c:expr ),* ] ),* ) => {{
-        let errors = vec![$(
+        let errors = [$(
             Feedback {
                 field: $n.to_string(),
                 messages: [ $( $c(&$v) ),* ]
