@@ -1,3 +1,10 @@
+> [!NOTE]
+>
+> This repository has been moved. Please check the new locations below.
+>
+> * [~grauwoelfchen/adequate](https://git.sr.ht/~grauwoelfchen/adequate) on Sourcehut
+> * [grauwoelfchen/adequate](https://codeberg.org/grauwoelfchen/adequate) on Codeberg
+
 # Adequate
 
 [![pipeline](
