@@ -131,7 +131,7 @@ https://gitlab.com/grauwoelfchen/adequate/compare/v0.1.1...trunk)
 
 ```text
 Adequate
-Copyright 2020-2023 Yasuhiro Яша Asaka
+Copyright 2020-2025 Yasha
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

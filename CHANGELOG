@@ -1,46 +1,46 @@
-Sat 26 Aug 2023 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Sat 26 Aug 2023 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Reduce the use of String and Option<String> in structs. So that
 	users can reuse built validator function without creating unnecessary string
 	objects again
 	* Create Validator and OptionalValidator types
 	* Remove public access to ValidatinResult type
 
-Wed 14 Sep 2022 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Wed 14 Sep 2022 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Fix warnings by checks of the latest clippy (stable)
 
-Sun 06 Jun 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Sun 06 Jun 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Change error messages for max/min validations (contain -> have)
 	* Add a new validation method "not_contain_if_given"
 
-Sat 29 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Sat 29 May 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new validation method "contains_if_given"
 
-Sat 22 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Sat 22 May 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new validation method "contains_if_present"
 
-Thu 20 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Thu 20 May 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new validation method "contains"
 
-Wed 19 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Wed 19 May 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* New release v0.1.2
 	* Fix bugs in PartialEq for Error, Feedback and Message struct
 	* Split modules into separated files (error, feedback and message)
 	* Add .renovaterc.json (dependencies check by renovate-runner)
 
-Sun 02 May 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Sun 02 May 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Add docs (pages) for adequate.yasha.rs
 	* Update base image for CI (use them from registry.gitlab.com)
 	* Remove .tool
 
-Wed 06 Jan 2021 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Wed 06 Jan 2021 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Change the default branch as `trunk`
 
-Fri 21 Nov 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Fri 21 Nov 2020 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* New release v0.1.1
 	* Add a new length validation methods "{max,min}_if_present"
 
-Mon 16 Nov 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Mon 16 Nov 2020 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Add a new length validation method "within"
 
-Fri 16 Oct 2020 Yasuhiro Яша Asaka <yasuhiro.asaka@grauwoelfchen.net>
+Fri 16 Oct 2020 Yasha <yasuhiro.asaka@grauwoelfchen.net>
 	* Initial release v0.1.0
